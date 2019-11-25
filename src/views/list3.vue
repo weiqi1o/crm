@@ -1,5 +1,7 @@
 <template>
-    $END$
+    <div>
+        列表3
+    </div>
 </template>
 
 <script>

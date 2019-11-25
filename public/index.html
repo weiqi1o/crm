@@ -4,13 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>ant</title>
+    <link rel="icon" href="<%= BASE_URL %>logo.png">
+    <title>东京学术</title>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but ant doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <!-- 引入提取的color.less文件 -->
+    <link rel="stylesheet/less" type="text/css" href="./color.less" />
+    <script>
+        window.less = {
+            async: false,
+            env: 'production'//production  development
+        };
+    </script>
+    <!-- 引入less.js文件（放在最后） -->
+    <script src="https://cdn.bootcss.com/less.js/2.7.3/less.min.js"></script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
