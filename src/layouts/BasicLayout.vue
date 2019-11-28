@@ -81,20 +81,20 @@
             <a-layout-content>
                 <div style="height: 100%">
                     <!--<tabs></tabs>-->
-                    <div class="contentBox">
+                    <div class="contentBox" id="contentBox">
                         <div>
                             <router-view/>
                         </div>
                     </div>
                 </div>
             </a-layout-content>
-            <a-layout-footer class="footer">
-                <p>上海市黄浦区南京西路388号仙乐斯·东朔商务中心2005室</p>
-                <div>
-                    <span>Copyright © 2012 - 2018</span> <span>版权所有：上海我憧教育科技有限公司</span> <a
-                        href="http://www.beian.miit.gov.cn">沪ICP备18026897号-1</a> <span>全国统一电话：4000155291</span>
-                </div>
-            </a-layout-footer>
+            <!--<a-layout-footer class="footer">-->
+                <!--<p>上海市黄浦区南京西路388号仙乐斯·东朔商务中心2005室</p>-->
+                <!--<div>-->
+                    <!--<span>Copyright © 2012 - 2018</span> <span>版权所有：上海我憧教育科技有限公司</span> <a-->
+                        <!--href="http://www.beian.miit.gov.cn">沪ICP备18026897号-1</a> <span>全国统一电话：4000155291</span>-->
+                <!--</div>-->
+            <!--</a-layout-footer>-->
         </a-layout>
 
 
@@ -111,14 +111,13 @@
     </a-layout>
 </template>
 <script>
-    import tabs from './../components/tabs'
     import showDrawer from './../components/showDrawer'
     import subMenu from './../components/subMenu'
     import {menuData} from './../router/config'
 
     export default {
         name: "BasicLayout",
-        components: {tabs, showDrawer,subMenu},
+        components: {showDrawer,subMenu},
         data() {
             return {
                 collapsed: false,
@@ -222,6 +221,7 @@
         top: 50%;
         right: 0;
         transform: translate(50%, -50%);
+        z-index: 9999;
     }
 
     .logo {
