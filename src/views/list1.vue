@@ -76,6 +76,7 @@
                         v-if="data.length"
                         title="确认删除?"
                         okText="确认"
+                        @cancel="cancelDelete()"
                         cancelText="取消"
                         @confirm="() => onDelete(record.key)"
                 >
@@ -541,7 +542,11 @@
             onDelete(key) {
                 const dataSource = [...this.data];
                 this.data = dataSource.filter(item => item.key !== key);
+                this.$message.error('删除成功！');
             },
+            cancelDelete(){
+                this.$message.warning('已取消！');
+            }
         }
     };
 </script>

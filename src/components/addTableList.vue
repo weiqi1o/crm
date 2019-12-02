@@ -19,7 +19,6 @@
             return {
                 visible: false,
                 // confirmLoading: false,
-                // sub:false
             };
         },
         methods: {
@@ -29,15 +28,17 @@
             handleCancel(e) {
                 this.visible = false;
             },
+            //提交添加
             handleCreate() {
                 const form = this.$refs.collectionForm.form;
                 form.validateFields((err, values) => {
                     if (err) {
                         return;
                     }
-                    console.log('Received values of form: ', values);
+                    console.log('添加数据: ', values);
                     form.resetFields();
                     this.visible = false;
+                    this.$message.success('添加成功');
                 });
             }
         },

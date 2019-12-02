@@ -297,7 +297,7 @@
 
     .contentBox {
         width: 100%;
-        height: 100%;
+        height: calc(100% - 137px);
         padding: 24px 24px 0;
         box-sizing: border-box;
         & > div {
