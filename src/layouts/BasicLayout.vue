@@ -13,15 +13,15 @@
             <!--logo结束-->
 
             <!--左侧菜单-->
-            <a-menu v-model="current" :theme="theme" mode="inline">
+            <a-menu v-model="current" :theme="theme" @openChange="onOpenChange" :openKeys="leftOpenKeys"  mode="inline" >
                 <template v-for="item in menu">
-                    <a-menu-item :key="item.meta.title" v-if="item.path">
+                    <a-menu-item :key="item.key" v-if="item.path">
                         <router-link :to="item.path">
                             <a-icon :type="item.icon"/>
-                            <span>{{item.meta.title}}</span>
+                            <span>{{item.key}}</span>
                         </router-link>
                     </a-menu-item>
-                    <subMenu v-else :menuInfo="item" :key="item.meta.title"/>
+                    <subMenu v-else :menuInfo="item" :key="item.key"/>
                 </template>
             </a-menu>
             <!--左侧菜单结束-->
@@ -37,15 +37,16 @@
                             <img v-else src="./../../static/imgs/logotw.png" alt="">
                         </div>
                         <!--头部导航-->
-                        <a-menu  :openKeys.sync="openKeys" v-model="current" :theme="theme" class="Hmenu" mode="horizontal">
+                        <a-menu :openKeys.sync="openKeys" v-model="current" :theme="theme" class="Hmenu"
+                                mode="horizontal">
                             <template v-for="item in menu">
-                                <a-menu-item :key="item.meta.title" v-if="item.path">
+                                <a-menu-item :key="item.key" v-if="item.path">
                                     <router-link :to="item.path">
                                         <a-icon type="mail"/>
-                                        <span>{{item.meta.title}}</span>
+                                        <span>{{item.key}}</span>
                                     </router-link>
                                 </a-menu-item>
-                                <subMenu v-else :menuInfo="item" :key="item.meta.title"/>
+                                <subMenu v-else :menuInfo="item" :key="item.key"/>
                             </template>
                         </a-menu>
                         <!--头部导航结束-->
@@ -80,7 +81,7 @@
             </a-layout-header>
             <a-layout-content>
                 <div style="height: 100%">
-                    <!--<tabs></tabs>-->
+                    <tabs></tabs>
                     <div class="contentBox" id="contentBox">
                         <div>
                             <router-view/>
@@ -89,11 +90,11 @@
                 </div>
             </a-layout-content>
             <!--<a-layout-footer class="footer">-->
-                <!--<p>上海市黄浦区南京西路388号仙乐斯·东朔商务中心2005室</p>-->
-                <!--<div>-->
-                    <!--<span>Copyright © 2012 - 2018</span> <span>版权所有：上海我憧教育科技有限公司</span> <a-->
-                        <!--href="http://www.beian.miit.gov.cn">沪ICP备18026897号-1</a> <span>全国统一电话：4000155291</span>-->
-                <!--</div>-->
+            <!--<p>上海市黄浦区南京西路388号仙乐斯·东朔商务中心2005室</p>-->
+            <!--<div>-->
+            <!--<span>Copyright © 2012 - 2018</span> <span>版权所有：上海我憧教育科技有限公司</span> <a-->
+            <!--href="http://www.beian.miit.gov.cn">沪ICP备18026897号-1</a> <span>全国统一电话：4000155291</span>-->
+            <!--</div>-->
             <!--</a-layout-footer>-->
         </a-layout>
 
@@ -113,11 +114,12 @@
 <script>
     import showDrawer from './../components/showDrawer'
     import subMenu from './../components/subMenu'
+    import tabs from './../components/tabs'
     import {menuData} from './../router/config'
 
     export default {
         name: "BasicLayout",
-        components: {showDrawer,subMenu},
+        components: {showDrawer, subMenu,tabs},
         data() {
             return {
                 collapsed: false,
@@ -125,10 +127,12 @@
                 theme: 'dark',
                 navStyle: 'components-layout-demo-custom-trigger',
                 sider: true,
-                current: ['mail'],
+                current:[],
                 openKeys: [],
+                leftOpenKeys: [],
                 headerNav: {padding: 0},
-                menu: menuData
+                menu: menuData,
+                rootSubmenuKeys:[]
 
             };
         },
@@ -149,14 +153,40 @@
             navStyleData(val) {
                 this.navStyle = val == 0 ? 'components-layout-demo-custom-trigger' : 'components-layout-demo-top';
                 this.sider = val == 0 ? true : false;
-                if(!this.sider){
-                    this.theme  = 'dark'
+                if (!this.sider) {
+                    this.theme = 'dark'
                 }
-            }
+            },
+            //设置展开导航
+            openNavData(){
+                this.current = [this.$route.meta.params.key];
+                if(this.$route.meta.params.openKeys.length>0){
+                    var openKeysTitle = this.$route.meta.params.openKeys;
+                    for (let i = 0; i < openKeysTitle.length; i++) {
+                        this.leftOpenKeys.push(openKeysTitle[i].title)
+                    }
+                }
+            },
+
+            onOpenChange(openKeys) {
+                const latestOpenKey = openKeys.some(item => item.title ==openKeys)
+                if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+                    this.leftOpenKeys = openKeys;
+                } else {
+                    this.leftOpenKeys = latestOpenKey ? [latestOpenKey] : [];
+                }
+            },
         },
-        mounted(){
-            this.current = [this.$route.meta.title];
+
+        mounted() {
+            this.openNavData()
+        },
+        watch: {
+            $route(to, from) {
+                this.openNavData()
+            },
         }
+
     };
 </script>
 <style lang="less">

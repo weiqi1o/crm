@@ -12,48 +12,48 @@ export const routerData = [
         path: '/',
         name: 'list1',
         component: list1,
-        meta: {title: '约课记录'},
+        meta: {title: '约课记录',params: {key: '约课记录',openKeys:[]}},
 
     },
     {
         path: '/list2',
         name: 'list2',
         component: list2,
-        meta: {title: '日语', params: {val: '课程管理'}},
+        meta: {title: '日语', params: {key: '日语',openKeys:[{title:'课程管理',path:'/list2'}]}},
 
     },
     {
         path: '/list3',
         name: 'list3',
         component: list3,
-        meta: {title: '美术', params: {val: '课程管理'}},
+        meta: {title: '美术', params: {key: '美术',openKeys:[{title:'课程管理',path:'/list2'}]}},
 
     },
     {
         path: '/list4',
         name: 'list4',
         component: list4,
-        meta: {title: '课期列表1', params: {val: '课期列表'}},
+        meta: {title: '课期列表1', params: {key: '课期列表1',openKeys:[{title:'课程管理',path:'/list2'},{title:'课期列表',path:'/list4'}]}},
     },
     {
         path: '/list5',
         name: 'list5',
         component: list5,
-        meta: {title: '课期列表2', params: {val: '课期列表'}},
+        meta: {title: '课期列表2', params: {key: '课期列表2',openKeys:[{title:'课程管理',path:'/list2'},{title:'课期列表',path:'/list4'}]}},
 
     },
     {
         path: '/list6',
         name: 'list6',
         component: list6,
-        meta: {title: '课期列表2'},
+        meta: {title: '课期列表ww',params: {key: '课期列表ww',openKeys:[]}},
 
     },
     {
         path: '/list7',
         name: 'list7',
         component: list7,
-        meta: {title: '约课记录ww'},
+        meta: {title: '约课记录ww',params: {key: '约课记录ww',openKeys:[]}},
 
     }
 ];
@@ -62,79 +62,33 @@ export const menuData = [
     {
         icon: 'edit',
         path: '/',
-        name: 'list1',
-        component: list1,
-        meta: {title: '约课记录'},
+        key: '约课记录',
 
     },
     {
         icon: 'scissor',
-        meta: {title: '课程管理'},
+        key: '课程管理',
         children: [
             {
                 path: '/list2',
-                name: 'list2',
-                component: list2,
-                meta: {
-                    title: '日语',
-                    params: [
-                        {
-                            title: '课程管理',
-                            path: '/list2'
-                        }
-                    ]
-
-                },
+                key: '日语',
 
             },
             {
                 path: '/list3',
-                name: 'list3',
-                component: list3,
-                meta: {
-                    title: '美术', params: [
-                        {
-                            title: '课程管理',
-                            path: '/list2'
-                        }
-                    ]
-                },
+                key: '美术'
 
             },
             {
-                meta: {title: '课期列表'},
+                key: '课期列表',
                 children: [
                     {
                         path: '/list4',
-                        name: 'list4',
-                        component: list4,
-                        meta: {
-                            title: '课期列表1', params: [
-                                {
-                                    title: '课程管理',
-                                    path: '/list2'
-                                },
-                                {
-                                    title: '课期列表',
-                                    path: '/list4'
-                                }
-                            ]
-                        },
+                        key: '课期列表1'
                     },
                     {
                         path: '/list5',
-                        name: 'list5',
-                        component: list5,
-                        meta: {title: '课期列表2', params: [
-                                {
-                                    title: '课程管理',
-                                    path: '/list2'
-                                },
-                                {
-                                    title: '课期列表',
-                                    path: '/list4'
-                                }
-                            ]},
+                        key: '课期列表2'
 
                     },
                 ]
@@ -145,17 +99,13 @@ export const menuData = [
     {
         icon: 'diff',
         path: '/list6',
-        name: 'list6',
-        component: list6,
-        meta: {title: '课期列表ww'},
+        key: '课期列表ww',
 
     },
     {
         icon: 'area-chart',
         path: '/list7',
-        name: 'list7',
-        component: list7,
-        meta: {title: '约课记录ww'},
+        key: '约课记录ww',
 
     }
 ];

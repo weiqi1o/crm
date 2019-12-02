@@ -158,21 +158,6 @@
                 const value = e.target.value;
                 this.confirmDirty = this.confirmDirty || !!value;
             },
-            // compareToFirstPassword(rule, value, callback) {
-            //     const form = this.form;
-            //     if (value && value !== form.getFieldValue('password')) {
-            //         callback('两个密码不一致');
-            //     } else {
-            //         callback();
-            //     }
-            // },
-            // validateToNextPassword(rule, value, callback) {
-            //     const form = this.form;
-            //     if (value && this.confirmDirty) {
-            //         form.validateFields(['confirm'], {force: true});
-            //     }
-            //     callback();
-            // },
             handleImgChange(info) {
                 this.loading = true;
                 getBase64(info.fileList[0].originFileObj, imageUrl => {
