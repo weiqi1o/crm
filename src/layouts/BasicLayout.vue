@@ -159,11 +159,14 @@
             },
             //设置展开导航
             openNavData(){
-                this.current = [this.$route.meta.params.key];
-                if(this.$route.meta.params.openKeys.length>0){
-                    var openKeysTitle = this.$route.meta.params.openKeys;
-                    for (let i = 0; i < openKeysTitle.length; i++) {
-                        this.leftOpenKeys.push(openKeysTitle[i].title)
+                if(!this.collapsed){
+                    console.log(!this.collapsed)
+                    this.current = [this.$route.meta.params.key];
+                    if(this.$route.meta.params.openKeys.length>0){
+                        var openKeysTitle = this.$route.meta.params.openKeys;
+                        for (let i = 0; i < openKeysTitle.length; i++) {
+                            this.leftOpenKeys.push(openKeysTitle[i].title)
+                        }
                     }
                 }
             },
@@ -227,6 +230,7 @@
             .logo, .Hmenu {
                 display: inline-block;
                 vertical-align: middle;
+                margin-right: 15px;
             }
 
         }

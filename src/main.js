@@ -7,12 +7,13 @@ import Antd from 'ant-design-vue';
 import $ from 'jquery'
 import './../static/css/theme/index.less'
 import VueWechatTitle from 'vue-wechat-title'
-
-
+import { ColorPicker } from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 Vue.config.productionTip = false;
 
 Vue.use(Antd);
-Vue.use(VueWechatTitle)
+Vue.use(VueWechatTitle);
+Vue.use(ColorPicker);
 new Vue({
   router,
   store,

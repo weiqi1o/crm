@@ -20,10 +20,12 @@
             </div>
             <h3>主题颜色</h3>
             <div class="styleColor">
-                <div v-for="(item,index) in styleColor" :class="{'activeChecked':index==5}" :style="{background:item}"
-                     @click="setStyleColor($event.currentTarget)">
-                    <a-icon type="check" class="radio"/>
-                </div>
+                <el-color-picker
+                        v-model="color"
+                        show-alpha
+                        @change =setStyleColor()
+                        :predefine="styleColor">
+                </el-color-picker>
             </div>
             <a-divider/>
 
@@ -50,7 +52,21 @@
             return {
                 visible: '',
                 overallStyle: 0,
-                styleColor: ['rgb(245, 34, 45)', 'rgb(250, 84, 28)', 'rgb(250, 173, 20)', 'rgb(19, 194, 194)', 'rgb(82, 196, 26)', 'rgb(24, 144, 255)', 'rgb(47, 84, 235)', 'rgb(114, 46, 209)'],
+                color:'rgb(24, 144, 255)',
+                styleColor: ['#ff4500',
+                    '#ff8c00',
+                    '#ffd700',
+                    '#90ee90',
+                    '#00ced1',
+                    'rgb(24, 144, 255)',
+                    '#c71585',
+                    'rgba(255, 69, 0, 0.68)',
+                    'rgb(255, 120, 0)',
+                    'hsv(51, 100, 98)',
+                    'hsva(120, 40, 94, 0.5)',
+                    'hsl(181, 100%, 37%)',
+                    'hsla(209, 100%, 56%, 0.73)',
+                    '#c7158577'],
                 activeStyleColor: '',
                 navStyle: 0
             };
@@ -75,9 +91,10 @@
             },
             //设置主题颜色
             setStyleColor(node) {
-                this.choose(node);
+                console.log(this.color)
+                // this.choose(node);
                 window.less.modifyVars({
-                    "@primary-color": this.styleColor[$(node).index()]
+                    "@primary-color": this.color
                 });
             },
             //设置导航风格
@@ -124,25 +141,6 @@
     }
 
     .styleColor {
-        & > div {
-            display: inline-block;
-            margin-right: 8px;
-            width: 20px;
-            height: 20px;
-            vertical-align: top;
-            cursor: pointer;
-            .radio {
-                width: 100%;
-                height: 100%;
-                color: white;
-                display: none;
-            }
-        }
-        .activeChecked {
-            .radio {
-                display: inline-block;
-            }
-        }
 
     }
 

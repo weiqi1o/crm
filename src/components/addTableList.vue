@@ -49,6 +49,7 @@
         text-align: start;
         padding: 20px;
         box-sizing: border-box;
+        background: white;
     }
 
 </style>
